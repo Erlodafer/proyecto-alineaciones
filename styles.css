@@ -1310,4 +1310,304 @@ select option {
   border-radius:3px; 
   font-family:'Barlow Condensed',sans-serif; 
   font-weight:700; 
-  font-size:11px;
+  font-size:11px; 
+  transition:all .2s; 
+}
+
+.btn-renombrar:hover { 
+  border-color:var(--amarillo); 
+  color:var(--amarillo); 
+}
+
+.btn-config { 
+  background:none; 
+  border:1px solid var(--borde); 
+  color:var(--texto-dim); 
+  cursor:pointer; 
+  padding:4px 10px; 
+  border-radius:3px; 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:11px; 
+  transition:all .2s; 
+}
+
+.btn-config:hover { 
+  border-color:var(--azul); 
+  color:#64B5F6; 
+}
+
+.btn-eliminar-equipo { 
+  background:none; 
+  border:1px solid var(--borde); 
+  color:var(--texto-dim); 
+  cursor:pointer; 
+  padding:4px 10px; 
+  border-radius:3px; 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:11px; 
+  transition:all .2s; 
+}
+
+.btn-eliminar-equipo:hover { 
+  border-color:var(--rojo); 
+  color:var(--rojo); 
+}
+
+.partido-admin-item { 
+  background:var(--gris-panel); 
+  border:1px solid var(--borde); 
+  border-radius:6px; 
+  padding:12px 18px; 
+  display:flex; 
+  align-items:flex-start; 
+  justify-content:space-between; 
+  gap:12px; 
+  margin-bottom:8px; 
+}
+
+.partido-admin-nombre { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:16px; 
+  color:var(--blanco); 
+  text-transform:uppercase; 
+  letter-spacing:1px; 
+}
+
+.partido-admin-badge { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-size:10px; 
+  font-weight:700; 
+  letter-spacing:1px; 
+  padding:2px 8px; 
+  border-radius:10px; 
+  background:rgba(0,200,83,.1); 
+  border:1px solid rgba(0,200,83,.2); 
+  color:var(--verde); 
+  margin-left:8px; 
+}
+
+.partido-admin-acciones { 
+  display:flex; 
+  gap:6px; 
+  flex-wrap:wrap; 
+  justify-content:flex-end; 
+}
+
+.partido-token-fila { 
+  margin-top:6px; 
+  display:flex; 
+  align-items:center; 
+  gap:8px; 
+}
+
+.partido-token-label { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:10px; 
+  letter-spacing:2px; 
+  text-transform:uppercase; 
+  color:var(--texto-dim); 
+}
+
+.partido-token-valor { 
+  font-family:monospace; 
+  font-size:11px; 
+  color:var(--amarillo); 
+  background:rgba(255,214,0,.07); 
+  border:1px solid rgba(255,214,0,.2); 
+  padding:2px 8px; 
+  border-radius:3px; 
+  max-width:260px; 
+  overflow:hidden; 
+  text-overflow:ellipsis; 
+  white-space:nowrap; 
+}
+
+.partido-token-vacio { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-size:11px; 
+  color:var(--texto-dim); 
+  font-style:italic; 
+}
+
+.btn-token { 
+  background:none; 
+  border:1px solid rgba(255,214,0,.35); 
+  color:var(--amarillo); 
+  cursor:pointer; 
+  padding:4px 10px; 
+  border-radius:3px; 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:11px; 
+  transition:all .2s; 
+}
+
+.btn-token:hover { 
+  background:rgba(255,214,0,.08); 
+}
+
+.btn-token-eliminar { 
+  background:none; 
+  border:1px solid var(--borde); 
+  color:var(--texto-dim); 
+  cursor:pointer; 
+  padding:4px 10px; 
+  border-radius:3px; 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:11px; 
+  transition:all .2s; 
+}
+
+.btn-token-eliminar:hover { 
+  border-color:var(--rojo); 
+  color:var(--rojo); 
+}
+
+.admin-empty { 
+  text-align:center; 
+  padding:32px; 
+  color:var(--texto-dim); 
+  font-size:14px; 
+  font-style:italic; 
+}
+
+.error-config { 
+  background:rgba(255,59,59,.1); 
+  border:1px solid rgba(255,59,59,.3); 
+  border-radius:8px; 
+  padding:20px 24px; 
+  margin-bottom:24px; 
+  display:none; 
+}
+
+.error-config.visible { 
+  display:block; 
+}
+
+.error-config p { 
+  color:var(--rojo); 
+  font-size:14px; 
+}
+
+.singular-grid { 
+  display:grid; 
+  grid-template-columns:1fr 1fr; 
+  gap:10px; 
+  margin-top:10px; 
+}
+
+.singular-grid .form-campo { 
+  margin:0; 
+}
+
+.singular-grid .form-campo label { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:11px; 
+  letter-spacing:2px; 
+  text-transform:uppercase; 
+  color:var(--texto-dim); 
+  display:block; 
+  margin-bottom:6px; 
+}
+
+.singular-grid .form-campo input { 
+  width:100%; 
+}
+
+.toast { 
+  position:fixed; 
+  bottom:24px; 
+  right:24px; 
+  background:var(--gris-panel); 
+  border-left:4px solid var(--verde); 
+  color:var(--texto); 
+  padding:14px 20px; 
+  border-radius:4px; 
+  font-size:14px; 
+  box-shadow:0 8px 32px rgba(0,0,0,.5); 
+  z-index:9999; 
+  transform:translateX(120%); 
+  transition:transform .3s ease; 
+  max-width:320px; 
+}
+
+.toast.show { 
+  transform:translateX(0); 
+}
+
+.toast.error { 
+  border-left-color:var(--rojo); 
+}
+
+/* ══ MODAL JSON GITHUB ══ */
+.json-preview { 
+  background:var(--negro); 
+  border:1px solid var(--borde); 
+  border-radius:4px; 
+  padding:12px; 
+  font-family:monospace; 
+  font-size:11px; 
+  color:var(--verde-neon); 
+  line-height:1.6; 
+  max-height:220px; 
+  overflow-y:auto; 
+  margin-top:10px; 
+  white-space:pre-wrap; 
+  word-break:break-all; 
+}
+
+.json-campo-grupo { 
+  display:grid; 
+  grid-template-columns:1fr 1fr; 
+  gap:10px; 
+  margin-bottom:12px; 
+}
+
+.json-campo-grupo .modal-campo { 
+  margin-bottom:0; 
+}
+
+.json-rango-row { 
+  background:var(--gris-panel); 
+  border:1px solid var(--borde); 
+  border-radius:4px; 
+  padding:10px 14px; 
+  margin-bottom:8px; 
+}
+
+.json-rango-label { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:10px; 
+  letter-spacing:2px; 
+  text-transform:uppercase; 
+  color:var(--texto-dim); 
+  margin-bottom:4px; 
+}
+
+.json-rango-valor { 
+  font-family:monospace; 
+  font-size:13px; 
+  color:var(--verde-neon); 
+}
+
+.badge-auto { 
+  display:inline-block; 
+  background:rgba(0,200,83,.12); 
+  border:1px solid rgba(0,200,83,.25); 
+  color:var(--verde); 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:9px; 
+  letter-spacing:1px; 
+  padding:1px 6px; 
+  border-radius:10px; 
+  margin-left:6px; 
+  vertical-align:middle; 
+}
