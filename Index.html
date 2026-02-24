@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Control de Alineaciones</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">ALINEACIONES <span>PRO</span></div>
+  <div class="header-right">
+    <div class="badge-partido" id="badge-partido">PARTIDO 1</div>
+    <button class="btn-admin" onclick="abrirLoginAdmin()">⚙ ADMIN</button>
+  </div>
+</header>
+
+<div class="tabs-bar" id="tabs-bar"></div>
+
+<div class="main">
+  <div class="error-config" id="error-config"><p id="error-config-txt"></p></div>
+
+  <div class="config-torneo">
+    <span class="config-label">TORNEO</span>
+    <select id="sel-torneo" onchange="cambiarTorneo()">
+      <option value="">Cargando torneos...</option>
+    </select>
+    <span id="torneo-info-badge"></span>
+  </div>
+
+  <div class="grid-equipos">
+    <!-- LOCAL -->
+    <div class="panel-equipo">
+      <div class="panel-header local">
+        <div>
+          <div class="panel-titulo local">EQUIPO LOCAL</div>
+          <div class="equipo-nombre" id="nombre-local">—</div>
+        </div>
+      </div>
+      <div class="selector-equipo">
+        <select id="sel-local" onchange="seleccionarEquipo('local')" style="pointer-events:none;opacity:0.5">
+          <option value="">Selecciona torneo primero</option>
+        </select>
+      </div>
+      <div id="cuerpo-local"></div>
+      <div class="contador" id="contador-local"></div>
+      <div class="estado-guardado" id="estado-local">✓ ALINEACIÓN GUARDADA EN SHEETS</div>
+      <div class="acciones">
+        <button class="btn-principal" id="btn-guardar-local" onclick="guardarAlineacion('local')" disabled>GUARDAR EN SHEETS</button>
+        <button class="btn-secundario" onclick="limpiarPanel('local')">LIMPIAR</button>
+        <button class="btn-secundario" id="btn-plantel-local" onclick="togglePlantel('local')" style="display:none;border-color:var(--azul);color:#64B5F6;flex:1">REVISAR PLANTEL</button>
+      </div>
+      <div class="plantel-panel" id="plantel-local" style="display:none">
+        <div class="plantel-header">
+          <span class="plantel-titulo">PLANTEL COMPLETO</span>
+          <input type="text" id="plantel-buscar-local" placeholder="Buscar..." oninput="filtrarPlantel('local')" class="plantel-buscar">
+        </div>
+        <div class="lista-jugadores" id="plantel-lista-local"></div>
+        <div class="plantel-agregar">
+          <input type="number" id="plantel-dorsal-local" placeholder="#" min="1" max="99" class="dorsal-input" style="width:72px">
+          <input type="text" id="plantel-nombre-local" placeholder="Nombre del jugador" style="flex:1" onkeydown="if(event.key==='Enter') agregarAlPlantel('local')">
+          <button class="btn-guardar-nombre" onclick="agregarAlPlantel('local')">+ AGREGAR</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISITANTE -->
+    <div class="panel-equipo">
+      <div class="panel-header visitante">
+        <div>
+          <div class="panel-titulo visitante">EQUIPO VISITANTE</div>
+          <div class="equipo-nombre" id="nombre-visitante">—</div>
+        </div>
+      </div>
+      <div class="selector-equipo">
+        <select id="sel-visitante" onchange="seleccionarEquipo('visitante')" style="pointer-events:none;opacity:0.5">
+          <option value="">Selecciona torneo primero</option>
+        </select>
+      </div>
+      <div id="cuerpo-visitante"></div>
+      <div class="contador" id="contador-visitante"></div>
+      <div class="estado-guardado" id="estado-visitante">✓ ALINEACIÓN GUARDADA EN SHEETS</div>
+      <div class="acciones">
+        <button class="btn-principal" id="btn-guardar-visitante" onclick="guardarAlineacion('visitante')" disabled>GUARDAR EN SHEETS</button>
+        <button class="btn-secundario" onclick="limpiarPanel('visitante')">LIMPIAR</button>
+        <button class="btn-secundario" id="btn-plantel-visitante" onclick="togglePlantel('visitante')" style="display:none;border-color:var(--azul);color:#64B5F6;flex:1">REVISAR PLANTEL</button>
+      </div>
+      <div class="plantel-panel" id="plantel-visitante" style="display:none">
+        <div class="plantel-header">
+          <span class="plantel-titulo">PLANTEL COMPLETO</span>
+          <input type="text" id="plantel-buscar-visitante" placeholder="Buscar..." oninput="filtrarPlantel('visitante')" class="plantel-buscar">
+        </div>
+        <div class="lista-jugadores" id="plantel-lista-visitante"></div>
+        <div class="plantel-agregar">
+          <input type="number" id="plantel-dorsal-visitante" placeholder="#" min="1" max="99" class="dorsal-input" style="width:72px">
+          <input type="text" id="plantel-nombre-visitante" placeholder="Nombre del jugador" style="flex:1" onkeydown="if(event.key==='Enter') agregarAlPlantel('visitante')">
+          <button class="btn-guardar-nombre" onclick="agregarAlPlantel('visitante')">+ AGREGAR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN AGREGAR EQUIPO -->
+  <div class="seccion-agregar-equipo" id="seccion-agregar-equipo" style="display:none">
+    <div class="agregar-equipo-titulo">➕ AGREGAR EQUIPO AL TORNEO</div>
+    <div class="agregar-equipo-row">
+      <div class="form-campo">
+        <label>Torneo</label>
+        <select id="sel-torneo-equipo" disabled>
+          <option value="">Selecciona un torneo primero</option>
+        </select>
+      </div>
+      <div class="form-campo">
+        <label>Nombre del equipo</label>
+        <input type="text" id="input-nombre-equipo" placeholder="Ej: Real Fútbol Club" onkeydown="if(event.key==='Enter') ejecutarAgregarEquipo()">
+      </div>
+      <button class="btn-agregar-equipo" id="btn-agregar-equipo" onclick="ejecutarAgregarEquipo()">+ AGREGAR</button>
+    </div>
+    <p class="agregar-equipo-hint">Se creará una nueva hoja en el Google Sheet del torneo seleccionado.</p>
+  </div>
+
+</div><!-- /.main -->
+
+<!-- MODALES -->
+<div class="modal-overlay" id="modal-login">
+  <div class="modal">
+    <div class="modal-titulo">Panel de Administración</div>
+    <div class="modal-subtitulo">Ingresa la clave para continuar</div>
+    <div class="modal-campo">
+      <label>Clave de acceso</label>
+      <input type="password" id="input-clave" placeholder="••••••••" onkeydown="if(event.key==='Enter') confirmarLogin()">
+    </div>
+    <div id="login-error" style="color:var(--rojo);font-size:13px;margin-top:8px;display:none;">Clave incorrecta</div>
+    <div class="modal-acciones">
+      <button class="btn-modal-ok" onclick="confirmarLogin()">ENTRAR</button>
+      <button class="btn-modal-cancel" onclick="cerrarModal('modal-login')">CANCELAR</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-renombrar">
+  <div class="modal">
+    <div class="modal-titulo">Renombrar Torneo</div>
+    <div class="modal-subtitulo">El nombre nuevo aparecerá en el selector</div>
+    <div class="modal-campo">
+      <label>Nuevo nombre</label>
+      <input type="text" id="input-nuevo-nombre" placeholder="Nombre del torneo" onkeydown="if(event.key==='Enter') confirmarRenombrar()">
+    </div>
+    <div class="modal-acciones">
+      <button class="btn-modal-ok" onclick="confirmarRenombrar()">GUARDAR</button>
+      <button class="btn-modal-cancel" onclick="cerrarModal('modal-renombrar')">CANCELAR</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-renombrar-partido">
+  <div class="modal">
+    <div class="modal-titulo">Renombrar Partido</div>
+    <div class="modal-campo">
+      <label>Nuevo nombre</label>
+      <input type="text" id="input-nombre-partido" placeholder="Nombre del partido" onkeydown="if(event.key==='Enter') confirmarRenombrarPartido()">
+    </div>
+    <div class="modal-acciones">
+      <button class="btn-modal-ok" onclick="confirmarRenombrarPartido()">GUARDAR</button>
+      <button class="btn-modal-cancel" onclick="cerrarModal('modal-renombrar-partido')">CANCELAR</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-eliminar">
+  <div class="modal">
+    <div class="modal-titulo">¿Eliminar?</div>
+    <div class="modal-subtitulo" id="modal-eliminar-txt"></div>
+    <div class="modal-acciones">
+      <button class="btn-modal-ok" style="background:var(--rojo)" onclick="confirmarEliminar()">ELIMINAR</button>
+      <button class="btn-modal-cancel" onclick="cerrarModal('modal-eliminar')">CANCELAR</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-token">
+  <div class="modal">
+    <div class="modal-titulo">App Token — Singular</div>
+    <div class="modal-subtitulo" id="modal-token-subtitulo">Asigna el token del panel de control en Singular</div>
+    <div class="modal-campo">
+      <label>App Token</label>
+      <input type="text" id="input-app-token" placeholder="Pega aquí el App Token de Singular" onkeydown="if(event.key==='Enter') confirmarToken()">
+    </div>
+    <div class="modal-acciones">
+      <button class="btn-modal-ok" onclick="confirmarToken()">GUARDAR TOKEN</button>
+      <button class="btn-modal-cancel" onclick="cerrarModal('modal-token')">CANCELAR</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-config-torneo">
+  <div class="modal">
+    <div class="modal-titulo" id="modal-config-titulo">Configurar Torneo</div>
+    <div class="modal-subtitulo">Define cómo funciona este torneo en la app</div>
+
+    <div class="config-grupo">
+      <div class="config-grupo-titulo">Jugadores titulares</div>
+      <div class="radio-group" id="rg-titulares">
+        <label class="radio-opt activo" onclick="selTitulares(11)"><input type="radio" name="titulares" value="11" checked> 11 jugadores</label>
+        <label class="radio-opt" onclick="selTitulares(5)"><input type="radio" name="titulares" value="5"> 5 jugadores</label>
+        <label class="radio-opt" onclick="selTitulares(0)"><input type="radio" name="titulares" value="0"> Personalizado</label>
+      </div>
+      <div class="campo-personalizado" id="campo-titulares-custom">
+        <label>Número de titulares</label>
+        <input type="number" id="input-titulares-custom" min="1" max="30" placeholder="Ej: 6">
+      </div>
+    </div>
+
+    <div class="config-grupo">
+      <div class="config-grupo-titulo">Suplentes</div>
+      <div class="toggle-group">
+        <div class="toggle-opt activo-no" id="tog-sup-no" onclick="selSuplentes(false)">✕ Sin suplentes</div>
+        <div class="toggle-opt" id="tog-sup-si" onclick="selSuplentes(true)">✓ Con suplentes</div>
+      </div>
+      <div class="campo-personalizado" id="campo-suplentes">
+        <label>Cantidad de suplentes (mínimo 3)</label>
+        <input type="number" id="input-suplentes" min="3" placeholder="Ej: 7">
+      </div>
+    </div>
+
+    <div class="config-grupo">
+      <div class="config-grupo-titulo">Director Técnico — formato en Sheets</div>
+      <div class="toggle-group">
+        <div class="toggle-opt" id="tog-dt-nombre" onclick="selPrefijoDT(false)">Solo nombre</div>
+        <div class="toggle-opt activo-si" id="tog-dt-prefijo" onclick="selPrefijoDT(true)">D.T. + nombre</div>
+      </div>
+      <div style="font-size:11px;color:var(--texto-dim);margin-top:8px;">
+        <b>D.T. + nombre</b>: escribe "D.T." en A101, nombre en B101 y la fórmula <code style="background:rgba(0,200,83,.1);padding:1px 4px;border-radius:2px;color:var(--verde-neon);">=A101&" "&B101</code> en E14.<br>
+        <b>Solo nombre</b>: escribe solo el nombre en E14.
+      </div>
+    </div>
+
+    <div class="modal-acciones">
+      <button class="btn-modal-ok" id="btn-guardar-config-torneo" onclick="guardarConfigTorneo()">GUARDAR CONFIG</button>
+      <button class="btn-modal-cancel" onclick="cerrarModal('modal-config-torneo')">CANCELAR</button>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL ADMIN -->
+<div class="admin-overlay" id="admin-overlay">
+  <div class="admin-header">
+    <div class="admin-titulo">⚙ Administración</div>
+    <div style="display:flex; gap:8px;">
+      <button class="btn-cerrar-admin" onclick="diagnosticarGitHub()" style="border-color:var(--azul); color:var(--azul);">🔍 DIAGNÓSTICO</button>
+      <button class="btn-cerrar-admin" onclick="cerrarAdmin()">✕ CERRAR</button>
+    </div>
+  </div>
+  <div class="admin-main">
+
+    <!-- Partidos -->
+    <div class="admin-section">
+      <div class="admin-section-titulo">Partidos (pestañas)</div>
+      <div id="lista-admin-partidos"><div class="admin-empty">Cargando...</div></div>
+      <div style="margin-top:14px;">
+        <div class="form-agregar" style="flex-direction:row;align-items:flex-end;gap:10px;padding:16px;">
+          <div class="form-campo" style="flex:1;margin:0">
+            <label>Nombre del nuevo partido</label>
+            <input type="text" id="nuevo-partido-nombre" placeholder="Ej: SANTIAGO" onkeydown="if(event.key==='Enter') agregarPartido()">
+          </div>
+          <button class="btn-agregar" id="btn-agregar-partido" onclick="agregarPartido()" style="margin:0">+ AGREGAR</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Agregar torneo -->
+    <div class="admin-section">
+      <div class="admin-section-titulo">Agregar nuevo torneo</div>
+      <div class="form-agregar">
+        <div class="form-ayuda">El ID del archivo está en la URL de Google Sheets entre <code>/d/</code> y <code>/edit</code>.</div>
+        <div class="form-campo">
+          <label>ID del archivo de Google Sheets</label>
+          <input type="text" id="nuevo-torneo-id" placeholder="1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms">
+        </div>
+        <div class="form-campo">
+          <label>Nombre del torneo</label>
+          <input type="text" id="nuevo-torneo-nombre" placeholder="Copa Apertura 2025">
+        </div>
+        <div class="config-grupo">
+          <div class="config-grupo-titulo">Jugadores titulares</div>
+          <div class="radio-group" id="rg-titulares-new">
+            <label class="radio-opt activo" onclick="selTitularesNew(11)"><input type="radio" name="titulares-new" value="11" checked> 11 jugadores</label>
+            <label class="radio-opt" onclick="selTitularesNew(5)"><input type="radio" name="titulares-new" value="5"> 5 jugadores</label>
+            <label class="radio-opt" onclick="selTitularesNew(0)"><input type="radio" name="titulares-new" value="0"> Personalizado</label>
+          </div>
+          <div class="campo-personalizado" id="campo-titulares-new-custom">
+            <label>Número de titulares</label>
+            <input type="number" id="input-titulares-new-custom" min="1" max="30" placeholder="Ej: 6">
+          </div>
+        </div>
+        <div class="config-grupo">
+          <div class="config-grupo-titulo">Suplentes</div>
+          <div class="toggle-group">
+            <div class="toggle-opt activo-no" id="tog-sup-no-new" onclick="selSuplentesNew(false)">✕ Sin suplentes</div>
+            <div class="toggle-opt" id="tog-sup-si-new" onclick="selSuplentesNew(true)">✓ Con suplentes</div>
+          </div>
+          <div class="campo-personalizado" id="campo-suplentes-new">
+            <label>Cantidad de suplentes (mínimo 3)</label>
+            <input type="number" id="input-suplentes-new" min="3" placeholder="Ej: 7">
+          </div>
+        </div>
+        <div class="config-grupo">
+          <div class="config-grupo-titulo">Director Técnico — formato en Sheets</div>
+          <div class="toggle-group">
+            <div class="toggle-opt" id="tog-dt-nombre-new" onclick="selPrefijoDTNew(false)">Solo nombre</div>
+            <div class="toggle-opt activo-si" id="tog-dt-prefijo-new" onclick="selPrefijoDTNew(true)">D.T. + nombre</div>
+          </div>
+        </div>
+        <button class="btn-agregar" id="btn-agregar" onclick="agregarTorneo()">+ AGREGAR TORNEO</button>
+      </div>
+    </div>
+
+    <!-- Lista torneos con opción para eliminar equipos -->
+    <div class="admin-section">
+      <div class="admin-section-titulo">Torneos y Equipos</div>
+      <div id="lista-admin-torneos"><div class="admin-empty">Cargando torneos y equipos...</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- MODAL EXPORTAR JSON GITHUB -->
+<div class="modal-overlay" id="modal-json-github">
+  <div class="modal" style="max-width:640px">
+    <div class="modal-titulo">Exportar a JSON — GitHub</div>
+    <div class="modal-subtitulo" id="modal-json-subtitulo">Completa los datos del equipo para publicar en Singular</div>
+
+    <div class="json-campo-grupo">
+      <div class="modal-campo">
+        <label>ID del equipo <span class="badge-auto">sugerido</span></label>
+        <input type="text" id="json-id" placeholder="ej: cdhreservas" oninput="actualizarPreviewJson()">
+      </div>
+      <div class="modal-campo">
+        <label>Tricode <span class="badge-auto">sugerido</span></label>
+        <input type="text" id="json-tricode" placeholder="ej: CDH" style="text-transform:uppercase" oninput="actualizarPreviewJson()">
+      </div>
+    </div>
+    
+    <div class="json-campo-grupo">
+      <div class="modal-campo">
+        <label>Title (Singular)</label>
+        <input type="text" id="json-title" placeholder="ej: Hércules Reservas" oninput="actualizarPreviewJson()">
+      </div>
+      <div class="modal-campo">
+        <label>eqName (nombre completo)</label>
+        <input type="text" id="json-eqname" placeholder="ej: C.D. Hércules" oninput="actualizarPreviewJson()">
+      </div>
+    </div>
+
+    <div class="modal-campo" style="margin-bottom:16px;">
+      <label>Icon (URL del logo) <span class="badge-auto">opcional</span></label>
+      <input type="text" id="json-icon" placeholder="https://ejemplo.com/logo.png" oninput="actualizarPreviewJson()">
+    </div>
+
+    <div style="margin-bottom:14px">
+      <div class="json-rango-label" style="margin-bottom:8px">Rangos de Sheets <span class="badge-auto">automático</span></div>
+      <div class="json-rango-row">
+        <div class="json-rango-label">sheetRange — Alineación titular (D1:E15)</div>
+        <div class="json-rango-valor" id="json-range1-preview">—</div>
+      </div>
+      <div class="json-rango-row">
+        <div class="json-rango-label">sheetRange2 — Plantel completo (A1:B100)</div>
+        <div class="json-rango-valor" id="json-range2-preview">—</div>
+      </div>
+    </div>
+
+    <div class="json-preview" id="json-preview-code">{ }</div>
+
+    <div class="modal-acciones">
+      <button class="btn-modal-ok" id="btn-publicar-json" onclick="publicarJsonGitHub()">🚀 PUBLICAR EN GITHUB</button>
+      <button class="btn-modal-cancel" onclick="cerrarModal('modal-json-github')">CANCELAR</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
