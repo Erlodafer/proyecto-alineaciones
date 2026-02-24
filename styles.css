@@ -1,0 +1,1313 @@
+:root {
+  --verde:#00C853; 
+  --verde-neon:#69FF47; 
+  --negro:#0A0F0A; 
+  --gris-oscuro:#111811;
+  --gris-medio:#1E2A1E; 
+  --gris-panel:#162016; 
+  --borde:#1F3A1F; 
+  --texto:#D4EDD4;
+  --texto-dim:#6A8A6A; 
+  --rojo:#FF3B3B; 
+  --amarillo:#FFD600; 
+  --azul:#2196F3; 
+  --blanco:#FFFFFF;
+}
+
+* { 
+  margin:0; 
+  padding:0; 
+  box-sizing:border-box; 
+}
+
+body { 
+  background:var(--negro); 
+  color:var(--texto); 
+  font-family:'Barlow',sans-serif; 
+  min-height:100vh;
+  background-image:radial-gradient(ellipse at 20% 0%,rgba(0,200,83,.08) 0%,transparent 50%),
+                   radial-gradient(ellipse at 80% 100%,rgba(0,200,83,.05) 0%,transparent 50%); 
+}
+
+header { 
+  background:var(--gris-oscuro); 
+  border-bottom:2px solid var(--verde); 
+  padding:0 24px; 
+  display:flex; 
+  align-items:center; 
+  justify-content:space-between; 
+  height:60px; 
+  position:sticky; 
+  top:0; 
+  z-index:100; 
+  box-shadow:0 4px 24px rgba(0,200,83,.15); 
+}
+
+.logo { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:900; 
+  font-size:22px; 
+  letter-spacing:3px; 
+  text-transform:uppercase; 
+  color:var(--verde); 
+}
+
+.logo span { 
+  color:var(--blanco); 
+}
+
+.header-right { 
+  display:flex; 
+  align-items:center; 
+  gap:12px; 
+}
+
+.badge-partido { 
+  background:var(--verde); 
+  color:var(--negro); 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:800; 
+  font-size:12px; 
+  letter-spacing:2px; 
+  padding:4px 12px; 
+  border-radius:2px; 
+}
+
+.btn-admin { 
+  background:transparent; 
+  border:1px solid var(--borde); 
+  color:var(--texto-dim); 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:12px; 
+  letter-spacing:2px; 
+  padding:5px 14px; 
+  border-radius:3px; 
+  cursor:pointer; 
+  transition:all .2s; 
+}
+
+.btn-admin:hover { 
+  border-color:var(--verde); 
+  color:var(--verde); 
+}
+
+.tabs-bar { 
+  background:var(--gris-oscuro); 
+  border-bottom:1px solid var(--borde); 
+  display:flex; 
+  align-items:center; 
+  gap:2px; 
+  padding:0 12px; 
+  overflow-x:auto; 
+}
+
+.tab { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:13px; 
+  letter-spacing:1px; 
+  text-transform:uppercase; 
+  padding:10px 18px; 
+  cursor:pointer; 
+  color:var(--texto-dim); 
+  border-bottom:3px solid transparent; 
+  transition:all .2s; 
+  white-space:nowrap; 
+  background:none; 
+  border-top:none; 
+  border-left:none; 
+  border-right:none; 
+}
+
+.tab:hover { 
+  color:var(--texto); 
+}
+
+.tab.activo { 
+  color:var(--verde); 
+  border-bottom-color:var(--verde); 
+}
+
+.tab-agregar { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:13px; 
+  color:var(--texto-dim); 
+  background:none; 
+  border:1px dashed var(--borde); 
+  border-radius:3px; 
+  padding:5px 12px; 
+  cursor:pointer; 
+  margin-left:4px; 
+  transition:all .2s; 
+  white-space:nowrap; 
+  flex-shrink:0; 
+}
+
+.tab-agregar:hover { 
+  border-color:var(--verde); 
+  color:var(--verde); 
+}
+
+.main { 
+  max-width:1300px; 
+  margin:0 auto; 
+  padding:24px 16px; 
+}
+
+.config-torneo { 
+  background:var(--gris-panel); 
+  border:1px solid var(--borde); 
+  border-radius:8px; 
+  padding:16px 20px; 
+  margin-bottom:24px; 
+  display:flex; 
+  align-items:center; 
+  gap:14px; 
+  flex-wrap:wrap; 
+}
+
+.config-label { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:13px; 
+  letter-spacing:2px; 
+  text-transform:uppercase; 
+  color:var(--texto-dim); 
+}
+
+.torneo-badge { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:11px; 
+  letter-spacing:1px; 
+  padding:3px 10px; 
+  border-radius:20px; 
+}
+
+.torneo-badge.especial { 
+  background:rgba(255,214,0,.15); 
+  color:var(--amarillo); 
+  border:1px solid rgba(255,214,0,.3); 
+}
+
+select,
+input[type="text"],
+input[type="number"],
+input[type="password"] { 
+  background:var(--gris-medio); 
+  border:1px solid var(--borde); 
+  color:var(--texto); 
+  font-family:'Barlow',sans-serif; 
+  font-size:14px; 
+  padding:8px 14px; 
+  border-radius:4px; 
+  outline:none; 
+  transition:border-color .2s; 
+}
+
+select:focus,
+input:focus { 
+  border-color:var(--verde); 
+}
+
+select option { 
+  background:var(--gris-medio); 
+}
+
+.grid-equipos { 
+  display:grid; 
+  grid-template-columns:1fr 1fr; 
+  gap:20px; 
+}
+
+@media(max-width:900px){ 
+  .grid-equipos { 
+    grid-template-columns:1fr; 
+  } 
+}
+
+.panel-equipo { 
+  background:var(--gris-panel); 
+  border:1px solid var(--borde); 
+  border-radius:8px; 
+  overflow:hidden; 
+}
+
+.panel-header { 
+  padding:14px 20px; 
+  display:flex; 
+  align-items:center; 
+  justify-content:space-between; 
+  border-bottom:1px solid var(--borde); 
+}
+
+.panel-header.local { 
+  background:linear-gradient(135deg,rgba(0,200,83,.15),transparent); 
+}
+
+.panel-header.visitante { 
+  background:linear-gradient(135deg,rgba(255,214,0,.1),transparent); 
+}
+
+.panel-titulo { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:800; 
+  font-size:11px; 
+  letter-spacing:3px; 
+  text-transform:uppercase; 
+}
+
+.panel-titulo.local { 
+  color:var(--verde); 
+}
+
+.panel-titulo.visitante { 
+  color:var(--amarillo); 
+}
+
+.equipo-nombre { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:900; 
+  font-size:22px; 
+  text-transform:uppercase; 
+  color:var(--blanco); 
+  letter-spacing:1px; 
+}
+
+.selector-equipo { 
+  display:flex; 
+  gap:10px; 
+  padding:14px 20px; 
+  border-bottom:1px solid var(--borde); 
+  align-items:center; 
+}
+
+.selector-equipo select { 
+  flex:1; 
+}
+
+.seccion-jugadores { 
+  padding:0; 
+}
+
+.seccion-titulo { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:10px; 
+  letter-spacing:2px; 
+  text-transform:uppercase; 
+  color:var(--texto-dim); 
+  padding:8px 12px 4px; 
+}
+
+.seccion-titulo.suplentes { 
+  color:var(--azul); 
+  border-top:1px solid var(--borde); 
+  padding-top:10px; 
+}
+
+.lista-jugadores { 
+  padding:6px 12px; 
+  display:flex; 
+  flex-direction:column; 
+  gap:5px; 
+}
+
+.jugador-row { 
+  display:grid; 
+  grid-template-columns:72px 1fr auto; 
+  align-items:center; 
+  gap:8px; 
+  background:var(--gris-medio); 
+  border:1px solid var(--borde); 
+  border-radius:5px; 
+  padding:5px 8px; 
+  transition:border-color .2s; 
+}
+
+.jugador-row.tiene-jugador { 
+  border-color:rgba(0,200,83,.3); 
+}
+
+.jugador-row.tiene-jugador.suplente { 
+  border-color:rgba(33,150,243,.3); 
+}
+
+.jugador-row.error { 
+  border-color:rgba(255,59,59,.5); 
+}
+
+.dorsal-input { 
+  width:72px; 
+  text-align:center; 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:800; 
+  font-size:18px; 
+  color:var(--verde-neon); 
+  padding:5px 4px; 
+  background:var(--gris-panel); 
+  border:1px solid var(--borde); 
+  border-radius:4px; 
+}
+
+.dorsal-input.suplente { 
+  color:#64B5F6; 
+}
+
+.dorsal-input:focus { 
+  border-color:var(--verde); 
+  outline:none; 
+}
+
+.dorsal-input.suplente:focus { 
+  border-color:var(--azul); 
+}
+
+.dorsal-input::-webkit-inner-spin-button,
+.dorsal-input::-webkit-outer-spin-button { 
+  opacity:1; 
+  height:28px; 
+  cursor:pointer; 
+}
+
+.nombre-jugador { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:600; 
+  font-size:14px; 
+  text-transform:uppercase; 
+  color:var(--texto); 
+  letter-spacing:.5px; 
+  overflow:hidden; 
+  text-overflow:ellipsis; 
+  white-space:nowrap; 
+}
+
+.nombre-jugador.vacio { 
+  color:var(--texto-dim); 
+  font-style:italic; 
+  font-weight:400; 
+  font-size:12px; 
+  text-transform:none; 
+}
+
+.nombre-jugador.error-txt { 
+  color:var(--rojo); 
+  font-size:11px; 
+}
+
+.nombre-editable { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:600; 
+  font-size:14px; 
+  text-transform:uppercase; 
+  background:rgba(0,200,83,.1); 
+  border:1px solid var(--verde); 
+  border-radius:3px; 
+  padding:2px 6px; 
+  color:var(--texto); 
+  flex:1; 
+}
+
+.fila-acciones { 
+  display:flex; 
+  gap:4px; 
+  align-items:center; 
+}
+
+.btn-editar { 
+  background:none; 
+  border:1px solid var(--borde); 
+  color:var(--texto-dim); 
+  cursor:pointer; 
+  padding:3px 7px; 
+  border-radius:3px; 
+  font-size:11px; 
+  transition:all .2s; 
+  white-space:nowrap; 
+}
+
+.btn-editar:hover { 
+  border-color:var(--verde); 
+  color:var(--verde); 
+}
+
+.btn-guardar-nombre { 
+  background:var(--verde); 
+  border:none; 
+  color:var(--negro); 
+  cursor:pointer; 
+  padding:3px 9px; 
+  border-radius:3px; 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:11px; 
+  letter-spacing:1px; 
+}
+
+.btn-borrar-suplente { 
+  background:none; 
+  border:1px solid var(--borde); 
+  color:var(--texto-dim); 
+  cursor:pointer; 
+  padding:3px 7px; 
+  border-radius:3px; 
+  font-size:11px; 
+  transition:all .2s; 
+}
+
+.btn-borrar-suplente:hover { 
+  border-color:var(--rojo); 
+  color:var(--rojo); 
+}
+
+.btn-agregar-suplente { 
+  margin:4px 12px 8px; 
+  background:rgba(33,150,243,.1); 
+  border:1px dashed rgba(33,150,243,.4); 
+  color:#64B5F6; 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:12px; 
+  letter-spacing:1px; 
+  padding:6px; 
+  border-radius:4px; 
+  cursor:pointer; 
+  width:calc(100% - 24px); 
+  transition:all .2s; 
+}
+
+.btn-agregar-suplente:hover { 
+  background:rgba(33,150,243,.2); 
+  border-color:var(--azul); 
+}
+
+.dt-seccion { 
+  padding:8px 12px; 
+  border-top:1px solid var(--borde); 
+  background:rgba(0,200,83,.03); 
+}
+
+.dt-label { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:10px; 
+  letter-spacing:2px; 
+  text-transform:uppercase; 
+  color:var(--texto-dim); 
+  margin-bottom:5px; 
+}
+
+.dt-row { 
+  display:grid; 
+  grid-template-columns:72px 1fr auto; 
+  align-items:center; 
+  gap:8px; 
+  background:var(--gris-medio); 
+  border:1px solid var(--borde); 
+  border-radius:5px; 
+  padding:5px 8px; 
+}
+
+.dt-row.tiene-dt { 
+  border-color:rgba(0,200,83,.3); 
+}
+
+.dt-badge { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:800; 
+  font-size:12px; 
+  color:var(--verde); 
+  letter-spacing:1px; 
+  text-align:center; 
+}
+
+.dt-nombre { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:600; 
+  font-size:14px; 
+  text-transform:uppercase; 
+  color:var(--texto); 
+  overflow:hidden; 
+  text-overflow:ellipsis; 
+  white-space:nowrap; 
+}
+
+.dt-nombre.vacio { 
+  color:var(--texto-dim); 
+  font-style:italic; 
+  font-weight:400; 
+  font-size:12px; 
+  text-transform:none; 
+}
+
+.dt-input-nombre { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:600; 
+  font-size:14px; 
+  background:rgba(0,200,83,.1); 
+  border:1px solid var(--verde); 
+  border-radius:3px; 
+  padding:2px 6px; 
+  color:var(--texto); 
+  width:100%; 
+}
+
+.contador { 
+  padding:8px 20px; 
+  border-top:1px solid var(--borde); 
+  display:flex; 
+  align-items:center; 
+  justify-content:space-between; 
+  gap:12px; 
+  flex-wrap:wrap; 
+}
+
+.contador-bloque { 
+  display:flex; 
+  align-items:center; 
+  gap:8px; 
+}
+
+.contador-txt { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-size:12px; 
+  letter-spacing:1px; 
+  color:var(--texto-dim); 
+}
+
+.contador-num { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:800; 
+  font-size:22px; 
+}
+
+.contador-num.completo { 
+  color:var(--verde); 
+}
+
+.contador-num.incompleto { 
+  color:var(--amarillo); 
+}
+
+.contador-num.suplentes { 
+  font-size:18px; 
+  color:var(--azul); 
+}
+
+.acciones { 
+  display:flex; 
+  gap:10px; 
+  padding:14px 20px; 
+  border-top:1px solid var(--borde); 
+  flex-wrap:wrap; 
+}
+
+.btn-principal { 
+  flex:1; 
+  background:var(--verde); 
+  border:none; 
+  color:var(--negro); 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:800; 
+  font-size:13px; 
+  letter-spacing:2px; 
+  text-transform:uppercase; 
+  padding:11px; 
+  border-radius:4px; 
+  cursor:pointer; 
+  transition:all .2s; 
+  min-width:120px; 
+}
+
+.btn-principal:hover:not(:disabled) { 
+  opacity:.85; 
+  transform:translateY(-1px); 
+}
+
+.btn-principal:disabled { 
+  opacity:.4; 
+  cursor:not-allowed; 
+  transform:none; 
+  background:var(--gris-medio); 
+  color:var(--texto-dim); 
+  border:1px solid var(--borde); 
+}
+
+.btn-secundario { 
+  flex:1; 
+  background:transparent; 
+  border:1px solid var(--borde); 
+  color:var(--texto-dim); 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:12px; 
+  letter-spacing:1px; 
+  text-transform:uppercase; 
+  padding:11px; 
+  border-radius:4px; 
+  cursor:pointer; 
+  transition:all .2s; 
+}
+
+.btn-secundario:hover { 
+  border-color:var(--rojo); 
+  color:var(--rojo); 
+}
+
+.estado-guardado { 
+  font-size:11px; 
+  font-family:'Barlow Condensed',sans-serif; 
+  letter-spacing:1px; 
+  color:var(--verde); 
+  padding:5px 20px; 
+  border-top:1px solid var(--borde); 
+  display:none; 
+}
+
+.estado-guardado.visible { 
+  display:block; 
+}
+
+/* ══ SECCIÓN AGREGAR EQUIPO ══ */
+.seccion-agregar-equipo { 
+  background:var(--gris-panel); 
+  border:1px solid var(--borde); 
+  border-radius:8px; 
+  padding:20px 24px; 
+  margin-top:20px; 
+}
+
+.agregar-equipo-titulo { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:800; 
+  font-size:13px; 
+  letter-spacing:3px; 
+  text-transform:uppercase; 
+  color:var(--texto-dim); 
+  margin-bottom:14px; 
+  padding-bottom:10px; 
+  border-bottom:1px solid var(--borde); 
+}
+
+.agregar-equipo-row { 
+  display:flex; 
+  gap:10px; 
+  align-items:flex-end; 
+  flex-wrap:wrap; 
+}
+
+.agregar-equipo-row .form-campo { 
+  flex:1; 
+  min-width:180px; 
+}
+
+.agregar-equipo-row .form-campo label { 
+  display:block; 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:11px; 
+  letter-spacing:2px; 
+  text-transform:uppercase; 
+  color:var(--texto-dim); 
+  margin-bottom:6px; 
+}
+
+.agregar-equipo-row .form-campo select,
+.agregar-equipo-row .form-campo input { 
+  width:100%; 
+}
+
+.btn-agregar-equipo { 
+  background:var(--verde); 
+  border:none; 
+  color:var(--negro); 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:800; 
+  font-size:13px; 
+  letter-spacing:2px; 
+  text-transform:uppercase; 
+  padding:10px 20px; 
+  border-radius:4px; 
+  cursor:pointer; 
+  transition:all .2s; 
+  white-space:nowrap; 
+}
+
+.btn-agregar-equipo:hover:not(:disabled) { 
+  opacity:.85; 
+}
+
+.btn-agregar-equipo:disabled { 
+  opacity:.4; 
+  cursor:not-allowed; 
+}
+
+.agregar-equipo-hint { 
+  font-size:12px; 
+  color:var(--texto-dim); 
+  margin-top:10px; 
+}
+
+/* ══ PLANTEL ══ */
+.plantel-panel { 
+  border-top:2px solid rgba(33,150,243,.4); 
+  background:rgba(33,150,243,.03); 
+}
+
+.plantel-header { 
+  display:flex; 
+  align-items:center; 
+  justify-content:space-between; 
+  gap:10px; 
+  padding:10px 12px 4px; 
+}
+
+.plantel-titulo { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:10px; 
+  letter-spacing:2px; 
+  text-transform:uppercase; 
+  color:#64B5F6; 
+}
+
+.plantel-buscar { 
+  flex:1; 
+  max-width:200px; 
+  font-size:12px; 
+  padding:4px 10px; 
+}
+
+.plantel-agregar { 
+  display:flex; 
+  align-items:center; 
+  gap:8px; 
+  padding:8px 12px 12px; 
+  border-top:1px solid var(--borde); 
+  margin-top:4px; 
+}
+
+.plantel-agregar input[type="text"] { 
+  flex:1; 
+  font-size:13px; 
+  padding:5px 10px; 
+}
+
+.plantel-fila { 
+  display:grid; 
+  grid-template-columns:72px 1fr auto; 
+  align-items:center; 
+  gap:8px; 
+  background:var(--gris-medio); 
+  border:1px solid rgba(33,150,243,.2); 
+  border-radius:5px; 
+  padding:5px 8px; 
+  transition:border-color .2s; 
+}
+
+.plantel-fila:hover { 
+  border-color:rgba(33,150,243,.4); 
+}
+
+.plantel-dorsal { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:800; 
+  font-size:18px; 
+  color:#64B5F6; 
+  text-align:center; 
+}
+
+.plantel-nombre { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:600; 
+  font-size:14px; 
+  text-transform:uppercase; 
+  color:var(--texto); 
+  overflow:hidden; 
+  text-overflow:ellipsis; 
+  white-space:nowrap; 
+}
+
+.plantel-nombre-input { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:600; 
+  font-size:14px; 
+  text-transform:uppercase; 
+  background:rgba(33,150,243,.1); 
+  border:1px solid var(--azul); 
+  border-radius:3px; 
+  padding:2px 6px; 
+  color:var(--texto); 
+  flex:1; 
+}
+
+.plantel-vacio { 
+  text-align:center; 
+  padding:16px; 
+  color:var(--texto-dim); 
+  font-size:13px; 
+  font-style:italic; 
+}
+
+/* ══ MODALES ══ */
+.modal-overlay { 
+  display:none; 
+  position:fixed; 
+  inset:0; 
+  background:rgba(0,0,0,.75); 
+  z-index:500; 
+  align-items:center; 
+  justify-content:center; 
+  backdrop-filter:blur(4px); 
+}
+
+.modal-overlay.visible { 
+  display:flex; 
+}
+
+.modal { 
+  background:var(--gris-oscuro); 
+  border:1px solid var(--borde); 
+  border-radius:10px; 
+  padding:32px; 
+  width:100%; 
+  max-width:580px; 
+  box-shadow:0 24px 64px rgba(0,0,0,.6); 
+  animation:popIn .2s ease; 
+  max-height:90vh; 
+  overflow-y:auto; 
+}
+
+@keyframes popIn { 
+  from { transform:scale(.95); opacity:0; } 
+  to { transform:scale(1); opacity:1; } 
+}
+
+.modal-titulo { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:900; 
+  font-size:20px; 
+  letter-spacing:2px; 
+  text-transform:uppercase; 
+  color:var(--blanco); 
+  margin-bottom:6px; 
+}
+
+.modal-subtitulo { 
+  font-size:13px; 
+  color:var(--texto-dim); 
+  margin-bottom:24px; 
+}
+
+.modal-campo { 
+  margin-bottom:16px; 
+}
+
+.modal-campo label { 
+  display:block; 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:11px; 
+  letter-spacing:2px; 
+  text-transform:uppercase; 
+  color:var(--texto-dim); 
+  margin-bottom:6px; 
+}
+
+.modal-campo input,
+.modal-campo select { 
+  width:100%; 
+}
+
+.modal-acciones { 
+  display:flex; 
+  gap:10px; 
+  margin-top:24px; 
+}
+
+.btn-modal-ok { 
+  flex:1; 
+  background:var(--verde); 
+  border:none; 
+  color:var(--negro); 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:800; 
+  font-size:14px; 
+  letter-spacing:2px; 
+  text-transform:uppercase; 
+  padding:12px; 
+  border-radius:4px; 
+  cursor:pointer; 
+}
+
+.btn-modal-ok:hover { 
+  opacity:.85; 
+}
+
+.btn-modal-cancel { 
+  flex:1; 
+  background:transparent; 
+  border:1px solid var(--borde); 
+  color:var(--texto-dim); 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:13px; 
+  letter-spacing:1px; 
+  text-transform:uppercase; 
+  padding:12px; 
+  border-radius:4px; 
+  cursor:pointer; 
+}
+
+/* ══ CONFIG TORNEO ══ */
+.config-grupo { 
+  background:var(--gris-panel); 
+  border:1px solid var(--borde); 
+  border-radius:6px; 
+  padding:16px; 
+  margin-bottom:12px; 
+}
+
+.config-grupo-titulo { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:11px; 
+  letter-spacing:2px; 
+  text-transform:uppercase; 
+  color:var(--texto-dim); 
+  margin-bottom:12px; 
+}
+
+.radio-group { 
+  display:flex; 
+  gap:8px; 
+  flex-wrap:wrap; 
+}
+
+.radio-opt { 
+  display:flex; 
+  align-items:center; 
+  gap:6px; 
+  cursor:pointer; 
+  padding:6px 12px; 
+  border:1px solid var(--borde); 
+  border-radius:4px; 
+  transition:all .2s; 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:600; 
+  font-size:13px; 
+  color:var(--texto-dim); 
+}
+
+.radio-opt:hover { 
+  border-color:var(--verde); 
+  color:var(--texto); 
+}
+
+.radio-opt.activo { 
+  border-color:var(--verde); 
+  color:var(--verde); 
+  background:rgba(0,200,83,.08); 
+}
+
+.radio-opt input { 
+  display:none; 
+}
+
+.toggle-group { 
+  display:flex; 
+  gap:8px; 
+}
+
+.toggle-opt { 
+  flex:1; 
+  padding:8px; 
+  border:1px solid var(--borde); 
+  border-radius:4px; 
+  text-align:center; 
+  cursor:pointer; 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:13px; 
+  color:var(--texto-dim); 
+  transition:all .2s; 
+}
+
+.toggle-opt.activo-no { 
+  border-color:var(--rojo); 
+  color:var(--rojo); 
+  background:rgba(255,59,59,.08); 
+}
+
+.toggle-opt.activo-si { 
+  border-color:var(--verde); 
+  color:var(--verde); 
+  background:rgba(0,200,83,.08); 
+}
+
+.campo-personalizado { 
+  margin-top:10px; 
+  display:none; 
+}
+
+.campo-personalizado.visible { 
+  display:block; 
+}
+
+.campo-personalizado label { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:11px; 
+  letter-spacing:2px; 
+  text-transform:uppercase; 
+  color:var(--texto-dim); 
+  display:block; 
+  margin-bottom:6px; 
+}
+
+.campo-personalizado input { 
+  width:100%; 
+}
+
+/* ══ ADMIN ══ */
+.admin-overlay { 
+  display:none; 
+  position:fixed; 
+  inset:0; 
+  background:var(--negro); 
+  z-index:400; 
+  overflow-y:auto; 
+  animation:fadeIn .2s ease; 
+}
+
+.admin-overlay.visible { 
+  display:block; 
+}
+
+@keyframes fadeIn { 
+  from { opacity:0; } 
+  to { opacity:1; } 
+}
+
+.admin-header { 
+  background:var(--gris-oscuro); 
+  border-bottom:2px solid var(--amarillo); 
+  padding:0 24px; 
+  display:flex; 
+  align-items:center; 
+  justify-content:space-between; 
+  height:60px; 
+  position:sticky; 
+  top:0; 
+  z-index:10; 
+}
+
+.admin-titulo { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:900; 
+  font-size:20px; 
+  letter-spacing:3px; 
+  text-transform:uppercase; 
+  color:var(--amarillo); 
+}
+
+.btn-cerrar-admin { 
+  background:transparent; 
+  border:1px solid var(--borde); 
+  color:var(--texto-dim); 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:12px; 
+  letter-spacing:2px; 
+  padding:6px 16px; 
+  border-radius:3px; 
+  cursor:pointer; 
+  transition:all .2s; 
+}
+
+.btn-cerrar-admin:hover { 
+  border-color:var(--rojo); 
+  color:var(--rojo); 
+}
+
+.admin-main { 
+  max-width:700px; 
+  margin:0 auto; 
+  padding:32px 16px; 
+}
+
+.admin-section { 
+  margin-bottom:32px; 
+}
+
+.admin-section-titulo { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:800; 
+  font-size:13px; 
+  letter-spacing:3px; 
+  text-transform:uppercase; 
+  color:var(--texto-dim); 
+  margin-bottom:16px; 
+  padding-bottom:8px; 
+  border-bottom:1px solid var(--borde); 
+}
+
+.form-agregar { 
+  background:var(--gris-panel); 
+  border:1px solid var(--borde); 
+  border-radius:8px; 
+  padding:24px; 
+  display:flex; 
+  flex-direction:column; 
+  gap:14px; 
+}
+
+.form-campo label { 
+  display:block; 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:11px; 
+  letter-spacing:2px; 
+  text-transform:uppercase; 
+  color:var(--texto-dim); 
+  margin-bottom:6px; 
+}
+
+.form-campo input { 
+  width:100%; 
+}
+
+.form-ayuda { 
+  font-size:12px; 
+  color:var(--texto-dim); 
+  line-height:1.5; 
+  background:rgba(0,200,83,.05); 
+  border-left:3px solid var(--verde); 
+  padding:10px 14px; 
+  border-radius:0 4px 4px 0; 
+}
+
+.form-ayuda code { 
+  background:rgba(0,200,83,.15); 
+  padding:1px 5px; 
+  border-radius:2px; 
+  font-family:monospace; 
+  font-size:11px; 
+  color:var(--verde-neon); 
+}
+
+.btn-agregar { 
+  background:var(--verde); 
+  border:none; 
+  color:var(--negro); 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:800; 
+  font-size:14px; 
+  letter-spacing:2px; 
+  text-transform:uppercase; 
+  padding:12px 24px; 
+  border-radius:4px; 
+  cursor:pointer; 
+  align-self:flex-start; 
+}
+
+.btn-agregar:hover { 
+  opacity:.85; 
+}
+
+.btn-agregar:disabled { 
+  opacity:.4; 
+  cursor:not-allowed; 
+}
+
+.torneo-admin-item { 
+  background:var(--gris-panel); 
+  border:1px solid var(--borde); 
+  border-radius:6px; 
+  padding:14px 18px; 
+  display:flex; 
+  align-items:flex-start; 
+  justify-content:space-between; 
+  gap:12px; 
+  margin-bottom:8px; 
+}
+
+.torneo-admin-item:hover { 
+  border-color:rgba(0,200,83,.2); 
+}
+
+.torneo-admin-info { 
+  flex:1; 
+  min-width:0; 
+}
+
+.torneo-admin-nombre { 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:16px; 
+  color:var(--blanco); 
+  text-transform:uppercase; 
+  letter-spacing:1px; 
+}
+
+.torneo-admin-id { 
+  font-size:11px; 
+  color:var(--texto-dim); 
+  font-family:monospace; 
+  overflow:hidden; 
+  text-overflow:ellipsis; 
+  white-space:nowrap; 
+  margin-top:2px; 
+}
+
+.torneo-admin-config { 
+  font-size:11px; 
+  margin-top:4px; 
+}
+
+.torneo-admin-config .tag { 
+  display:inline-block; 
+  background:rgba(0,200,83,.1); 
+  border:1px solid rgba(0,200,83,.2); 
+  color:var(--verde); 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:10px; 
+  letter-spacing:1px; 
+  padding:1px 7px; 
+  border-radius:10px; 
+  margin-right:4px; 
+}
+
+.torneo-admin-config .tag.suplentes { 
+  background:rgba(33,150,243,.1); 
+  border-color:rgba(33,150,243,.2); 
+  color:#64B5F6; 
+}
+
+.torneo-admin-config .tag.dt { 
+  background:rgba(255,214,0,.1); 
+  border-color:rgba(255,214,0,.2); 
+  color:var(--amarillo); 
+}
+
+.torneo-admin-acciones { 
+  display:flex; 
+  gap:6px; 
+  flex-shrink:0; 
+  flex-wrap:wrap; 
+  justify-content:flex-end; 
+}
+
+.btn-renombrar { 
+  background:none; 
+  border:1px solid var(--borde); 
+  color:var(--texto-dim); 
+  cursor:pointer; 
+  padding:4px 10px; 
+  border-radius:3px; 
+  font-family:'Barlow Condensed',sans-serif; 
+  font-weight:700; 
+  font-size:11px;
